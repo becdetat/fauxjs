@@ -1,0 +1,11 @@
+{
+  "name": "fauxjs",
+  "version": "0.1.0",
+  "description": "Function mocking and call assertions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ben Scott <ben@belfryimages.com.au>",
+  "license": "Apache-2.0"
+}
