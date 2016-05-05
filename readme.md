@@ -5,7 +5,7 @@ A very basic function mocking and call assertion library.
 
 ## Installation
 
-Hopefully:
+Via NPM:
 
 	npm install fauxjs
 
