@@ -74,4 +74,15 @@ describe('faux', function() {
 			checkFn.should.throw('Faux function should not have been called with arguments matching: "function (x) {\r\n\t\t\t\t\treturn x[0] == 123\r\n\t\t\t\t}" but it was called 1 times with the following arguments: [{"0":123}]')
 		})		
 	})
+	describe('faux function', function() {
+		it('gets called with the original arguments', function() {
+			var fn = faux(function(a, b, c) {
+				a.should.equal('a')
+				b.should.equal('b')
+				c.should.equal('c')
+			})
+
+			fn('a', 'b', 'c')
+		})
+	})
 })

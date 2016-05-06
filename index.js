@@ -6,7 +6,7 @@
 
 		var fauxFn = function() {
 			callArgs.push(arguments)
-			return fn()
+			return fn.apply(this, arguments)
 		}
 
 		function getWasCalled(argFn) {

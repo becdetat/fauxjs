@@ -40,7 +40,7 @@ A callback can be passed to `wasCalled`, allowing conditions to be applied to th
 
 There is a corresponding `wasNotCalled` method that just reverses the logic.
 
-### Mocking Angular's `$http` service
+### Mocking Angular services
 
 Angular's `$http` service is usually used by chaining `.then()` calls to the promise. For example:
 
@@ -48,7 +48,9 @@ Angular's `$http` service is usually used by chaining `.then()` calls to the pro
 		.post('/some/api', {
 			id: 123
 		})
-		.then(function(x) { ... })
+		.then(function(x) { 
+			$state.go('nextPage')
+		})
 
 Faux can be used to create a simple mock `$http` service to support this:
 
@@ -56,9 +58,14 @@ Faux can be used to create a simple mock `$http` service to support this:
 	var $http = {
 		post: faux(function() {
 			return {
-				then: faux()
+				then: faux(function(success, error) {
+					return success()
+				})
 			}
 		})
+	}
+	var $state = {
+		go: faux()
 	}
 	var controller = new MyController($http)
 
@@ -68,6 +75,9 @@ Faux can be used to create a simple mock `$http` service to support this:
 	// Assert:
 	$http.post.wasCalled(function(x) {
 		return x[0] == '/some/api' && x[1].id == 123
+	})
+	$state.go.wasCalled(function(x) {
+		return x[0] == 'nextPage'
 	})
 
 
